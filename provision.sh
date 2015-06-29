@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "#### STARTING BASH PROVISIONING OF OUR OSX BUILD VM ####"
 
 sudo rm -rf ~/chef-solo ~/chef-repo ~/dd-agent-omnibus ~/.bundler
@@ -29,9 +28,9 @@ tar -zxf master && mv chef-chef-repo* chef-repo && rm master
 cd ~/chef-repo/cookbooks && git clone https://github.com/DataDog/osx-dd-agent-build-box.git
 cd osx-dd-agent-build-box && berks install
 cd ~/chef-repo
-echo 'file_cache_path "/Users/vagrant/chef-solo"
-cookbook_path ["/Users/vagrant/chef-repo/cookbooks", "/Users/vagrant/.berkshelf/cookbooks"]' > solo.rb
-echo '{"run_list": [ "recipe[osx-dd-agent-build-box]" ]}' > osx-build.json
+echo "file_cache_path \"$HOME/chef-solo\"
+cookbook_path [\"$HOME/chef-repo/cookbooks\", \"$HOME/.berkshelf/cookbooks\"]' > solo.rb
+echo '{\"run_list\": [ \"recipe[osx-dd-agent-build-box]\" ]}" > osx-build.json
 sudo chef-solo -c solo.rb -j osx-build.json
 
 # This line's a nasty one but I didn't find a cleaner workaround... there should

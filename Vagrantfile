@@ -19,6 +19,8 @@ Vagrant.configure(2) do |config|
   config.vm.network :private_network, ip: '192.168.34.132'
 
   # Let's trigger the build !
-  config.vm.provision "shell", inline: "sh ./dd-agent-omnibus/omnibus_build.sh", privileged: false
+  config.vm.provision "shell", inline: "AGENT_BRANCH=quentin/macos-build "\
+    "OMNIBUS_BRANCH=etienne/omnibus-4-mac "\
+    "sh ./dd-agent-omnibus/omnibus_build.sh", privileged: false
 
 end
