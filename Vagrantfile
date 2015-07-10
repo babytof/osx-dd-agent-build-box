@@ -24,6 +24,6 @@ Vagrant.configure(2) do |config|
 
   # Port forwarding
   config.vm.network "forwarded_port", guest: 1099, host: 1199
-  config.vm.network :private_network, ip: '192.168.34.132'
+  config.vm.network "public_network"
 
 end
